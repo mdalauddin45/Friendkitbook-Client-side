@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
@@ -8,9 +8,12 @@ import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import Reaction from "./Reaction/Reaction";
 import { format } from "date-fns";
+import { useEffect } from "react";
+import { comment } from "postcss";
 
 const SignlePost = ({ post }) => {
   const { loading, user } = useContext(AuthContext);
+  const [resendComment, setResendComment] = useState([]);
   // console.log(post);
   const { authorName, authorImage, date, time, _id } = post;
   const handleSubmit = (event) => {
@@ -32,6 +35,17 @@ const SignlePost = ({ post }) => {
       event.target.reset();
     });
   };
+  useEffect(() => {
+    fetch(`http://localhost:5000/comment/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setResendComment(data);
+      });
+  }, []);
+  console.log();
+  const rescentComment = { ...resendComment?.slice(0) };
+  console.log(rescentComment[0]?.comment?.commentText);
+
   return (
     <div className="py-5 mx-3">
       <div className="flex flex-col max-w-[810px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
@@ -144,9 +158,9 @@ const SignlePost = ({ post }) => {
             </div>
           </div>
           <div className="space-y-3">
-            <p className="text-sm">
-              <span className="text-base font-semibold">leroy_jenkins72</span>
-              Nemo ea quasi debitis impedit!
+            <p className="text-sm ">
+              <span>{rescentComment[0]?.comment?.userName}</span>
+              <span>{rescentComment[0]?.comment?.commentText}</span>
             </p>
 
             <form onSubmit={handleSubmit}>

@@ -7,7 +7,7 @@ function AllComment({ comment }) {
   console.log(dateTime);
   return (
     <div>
-      <div className="flex space-x-4">
+      <div className="flex space-x-4 py-3">
         <img
           alt=""
           src={userImage}
@@ -22,7 +22,9 @@ function AllComment({ comment }) {
             {userName}
           </a>
           <span className="text-xs dark:text-gray-400">{commentText}</span>
-          <span className="text-xs dark:text-gray-400">{date}</span>
+          <span className="text-xs dark:text-gray-400">
+            {date} {time}
+          </span>
         </div>
       </div>
     </div>

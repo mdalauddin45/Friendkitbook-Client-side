@@ -4,9 +4,9 @@ import { toast } from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import { addComment } from "../../../api/ImageUpload";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
-import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import AllComment from "./AllComment";
+import { format } from "date-fns";
 
 const Detail = () => {
   const postData = useLoaderData();
@@ -33,15 +33,15 @@ const Detail = () => {
       userImage: user?.photoURL,
       userName: user?.displayName,
       _id,
-      time,
-      date,
+      time: format(new Date(), "p"),
+      date: format(new Date(), "PP"),
     };
     console.log(commentData);
     addComment(commentData).then((data) => {
       console.log(data);
       toast.success("Comment Successfuly !");
       event.target.reset();
-      setLoading(true);
+      setLoading(!loading);
     });
   };
   return (
