@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^13.5.0",
     "daisyui": "^2.46.0",
     "firebase": "^9.15.0",
+    "framer-motion": "^8.0.2",
     "react": "^18.2.0",
     "react-datepicker": "^4.8.0",
     "react-day-picker": "^8.4.1",

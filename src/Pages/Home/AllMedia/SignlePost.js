@@ -1,11 +1,12 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SignlePost = ({ post }) => {
   console.log(post);
-  const { authorName, authorImage, date, time } = post;
+  const { authorName, authorImage, date, time, _id } = post;
   return (
-    <div className="py-5">
-      <div className="flex flex-col max-w-[820px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
+    <div className="py-5 mx-3">
+      <div className="flex flex-col max-w-[810px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
         <div className="flex items-center justify-between p-3">
           <div className="flex items-center space-x-2">
             <img
@@ -36,12 +37,17 @@ const SignlePost = ({ post }) => {
         </div>
         {post?.image && post?.posttext ? (
           <>
-            <h1>{post?.posttext}</h1>
-            <img
-              src={post?.image}
-              alt=""
-              className="object-cover object-center w-full h-72 dark:bg-gray-500"
-            />
+            <h1>
+              {post?.posttext?.slice(0, 300) + "..."}
+              <Link to={`/media/${_id}`}>see more</Link>
+            </h1>
+            <Link to={`/media/${_id}`}>
+              <img
+                src={post?.image}
+                alt=""
+                className="object-cover object-center w-full h-[500px]  bg-gray-500"
+              />
+            </Link>
           </>
         ) : (
           <>
