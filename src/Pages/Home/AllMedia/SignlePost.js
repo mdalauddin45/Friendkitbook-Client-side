@@ -1,9 +1,11 @@
 import React from "react";
 
-const SignlePost = () => {
+const SignlePost = ({ post }) => {
+  console.log(post);
+
   return (
     <div>
-      <div className="rounded-md shadow-md sm:w-96 dark:bg-gray-900 dark:text-gray-100">
+      <div className="flex flex-col max-w-[820px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
         <div className="flex items-center justify-between p-3">
           <div className="flex items-center space-x-2">
             <img

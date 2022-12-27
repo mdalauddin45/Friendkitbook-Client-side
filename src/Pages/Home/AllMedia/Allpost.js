@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import SignlePost from "./SignlePost";
 
 const Allpost = () => {
   const [posts, setPosts] = useState([]);
@@ -12,6 +13,9 @@ const Allpost = () => {
   return (
     <div>
       <h1>this is allpost</h1>
+      {posts.map((post) => (
+        <SignlePost post={post} key={post?._id}></SignlePost>
+      ))}
     </div>
   );
 };

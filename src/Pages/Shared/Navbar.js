@@ -10,7 +10,10 @@ const Navbar = () => {
   return (
     <div className="navbar shadow-lg">
       <div className="navbar-start">
-        <Link className="flex rounded-lg py-2 font-semibold text-[#5596e6] text-2xl">
+        <Link
+          to="/"
+          className="flex rounded-lg py-2 font-semibold text-[#5596e6] text-2xl"
+        >
           <img src={logo} className="w-8 rounded-full " alt="" />
           <span className="px-1"> FriendKitBook</span>
         </Link>

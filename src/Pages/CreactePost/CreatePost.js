@@ -1,37 +1,40 @@
-import React, { useContext, useState } from "react";
-import { AuthContext } from "../../../contexts/AuthProvider";
 import { CameraIcon } from "@heroicons/react/24/solid";
-import PrimaryButton from "../../../components/Button/PrimaryButton";
-import SmallSpinner from "../../../components/Spinner/SmallSpinner";
-import { addPost, imageUpload } from "../../../api/ImageUpload";
+import React, { useContext, useState } from "react";
 import { toast } from "react-hot-toast";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { addPost, imageUpload } from "../../api/ImageUpload";
+import PrimaryButton from "../../components/Button/PrimaryButton";
+import SmallSpinner from "../../components/Spinner/SmallSpinner";
+import { AuthContext } from "../../contexts/AuthProvider";
 import { format } from "date-fns";
-const PostWrite = () => {
+
+const CreatePost = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState("");
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const posttext = event.target.posttext.value;
-    const name = user?.displayName;
+
     const date = format(new Date(), "PP");
     const time = format(new Date(), "p");
-    console.log(date, time);
+    // console.log(date, time);
     // Image Upload
     const image = event.target.image.files[0];
     // console.log(posttext, name, date, time);
     setLoading(true);
-    console.log(image);
+    // console.log(image);
     imageUpload(image)
       .then((res) => {
         const postData = {
           posttext,
-          name,
           date,
           time,
           image: res?.data?.display_url,
           email: user?.email,
+          authorImage: user?.photoURL,
+          authorName: user?.displayName,
         };
         console.log(postData);
         addPost(postData).then((data) => {
@@ -39,7 +42,7 @@ const PostWrite = () => {
           setLoading(false);
           toast.success("post Successfuly !");
           event.target.reset();
-          Navigate("/media");
+          navigate("/media");
         });
       })
       .catch((err) => {
@@ -105,4 +108,4 @@ const PostWrite = () => {
   );
 };
 
-export default PostWrite;
+export default CreatePost;
