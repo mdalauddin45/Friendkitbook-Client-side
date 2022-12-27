@@ -2,35 +2,47 @@ import React, { useContext, useState } from "react";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import { CameraIcon } from "@heroicons/react/24/solid";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
+import SmallSpinner from "../../../components/Spinner/SmallSpinner";
+import { addPost, imageUpload } from "../../../api/ImageUpload";
+import { toast } from "react-hot-toast";
+import { Navigate } from "react-router-dom";
 
 const PostWrite = () => {
-  const { loading, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState("");
   const handleSubmit = (event) => {
     event.preventDefault();
-    const name = event.target.name.value;
-    const email = event.target.email.value;
-
+    const posttext = event.target.posttext.value;
+    const name = user?.displayName;
+    const date = new Date().toDateString();
+    const time = new Date().toLocaleTimeString();
     // Image Upload
     const image = event.target.image.files[0];
-    const formData = new FormData();
-    formData.append("image", image);
-    const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
-
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imageData) => {
-        const userData = {
+    console.log(posttext, name, date, time);
+    setLoading(true);
+    imageUpload(image)
+      .then((res) => {
+        const postData = {
+          posttext,
           name,
-          email,
-          image: imageData.data.display_url,
+          date,
+          time,
+          image: res.data.display_url,
+          email: user?.email,
         };
-        // console.log(userData);
+        // console.log(categoriData);
+        addPost(postData).then((data) => {
+          // console.log(data);
+          setLoading(false);
+          toast.success("post Successfuly !");
+          Navigate("/");
+        });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        setLoading(false);
+      });
   };
 
   const handleImageChange = (image) => {
@@ -44,9 +56,9 @@ const PostWrite = () => {
           onSubmit={handleSubmit}
           className=" w-full  border rounded-md shadow-lg px-5  pt-10"
         >
-          <div className="flex">
-            <div className="">
-              <h1> user pic</h1>
+          <div className="flex ">
+            <div className="w-12 mr-5 btn-circle avatar">
+              <img src={user?.photoURL} className="rounded-full" alt="" />
             </div>
             <div>
               <textarea
@@ -73,9 +85,9 @@ const PostWrite = () => {
               <span className="label-text-alt">
                 <PrimaryButton
                   type="submit"
-                  classes="w-full px-5 py-3 font-semibold rounded-lg bg-[#3BB77E] text-white"
+                  classes="w-full px-5 py-3 font-semibold rounded-lg  text-white"
                 >
-                  {loading ? "loading" : "Post"}
+                  {loading ? <SmallSpinner /> : "Post"}
                 </PrimaryButton>
               </span>
             </label>

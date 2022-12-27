@@ -1,11 +1,19 @@
 import React from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
-
+import logo from "../../assets/logo2.jpg";
+import PrimaryButton from "../../components/Button/PrimaryButton";
+import { AuthContext } from "../../contexts/AuthProvider";
 const Navbar = () => {
+  const { user, logout } = useContext(AuthContext);
+  console.log(user);
   return (
     <div className="navbar shadow-lg">
       <div className="navbar-start">
-        <Link className="btn btn-ghost normal-case text-xl">FriendKitBook</Link>
+        <Link className="flex rounded-lg py-2 font-semibold text-[#5596e6] text-2xl">
+          <img src={logo} className="w-8 rounded-full " alt="" />
+          <span className="px-1"> FriendKitBook</span>
+        </Link>
       </div>
       <div className="navbar-center hidden md:flex lg:flex">
         <ul className="menu menu-horizontal px-1">
@@ -30,7 +38,7 @@ const Navbar = () => {
         <div className="dropdown dropdown-end">
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
             <div className="w-10 rounded-full">
-              <img src="https://placeimg.com/80/80/people" />
+              <img src={user?.photoURL} />
             </div>
           </label>
           <ul
@@ -57,12 +65,22 @@ const Navbar = () => {
                 <Link>About</Link>
               </li>
             </div>
-            <li>
-              <Link to="/login">Login</Link>
-            </li>
-            <li>
-              <Link to="/signup">Sign Up</Link>
-            </li>
+            {user?.email ? (
+              <>
+                <li>
+                  <PrimaryButton handler={logout}>logout</PrimaryButton>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Login</Link>
+                </li>
+                <li>
+                  <Link to="/signup">Sign Up</Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

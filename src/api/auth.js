@@ -16,7 +16,7 @@ export const setAuthToken = (user) => {
     .then((data) => {
       // console.log(data);
       //Save token in LocalStorage
-      localStorage.setItem("nest-token", data.token);
+      localStorage.setItem("friendkitbook-token", data.token);
     });
 };
 

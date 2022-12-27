@@ -26,9 +26,10 @@ const SignUp = () => {
     const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
-
+    // console.log(name, email, password);
     // Image Upload
     const image = event.target.image.files[0];
+    // console.log(name, email, password, image);
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${process.env.REACT_APP_IMGBB_KEY}`;
@@ -44,7 +45,7 @@ const SignUp = () => {
           email,
           image: imageData.data.display_url,
         };
-        // console.log(userData);
+        console.log(userData);
 
         // Create User
         createUser(email, password)
@@ -119,8 +120,12 @@ const SignUp = () => {
               </div>
               <div>
                 <input
+                  required
                   type="file"
-                  className="file-input file-input-bordered file-input-info w-full max-w-xs"
+                  id="image"
+                  name="image"
+                  accept="image/*"
+                  className="file-input  file-input-success w-full max-w-xs"
                 />
               </div>
               <div>
@@ -150,7 +155,7 @@ const SignUp = () => {
               <div>
                 <PrimaryButton
                   type="submit"
-                  classes="w-full px-8 py-5 font-semibold rounded-lg bg-[#3BB77E] text-white"
+                  classes="w-full px-8 py-5 font-semibold rounded-lg "
                 >
                   {loading ? <SmallSpinner /> : "Submit & Register"}
                 </PrimaryButton>

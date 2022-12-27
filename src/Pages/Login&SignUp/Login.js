@@ -115,7 +115,7 @@ const Login = () => {
             <div>
               <PrimaryButton
                 type="submit"
-                classes="w-full px-8 py-3 font-semibold rounded-md bg-[#3BB77E] text-white"
+                classes="w-full px-8 py-3 font-semibold rounded-md  "
               >
                 {loading ? <SmallSpinner /> : "Sign in"}
               </PrimaryButton>
