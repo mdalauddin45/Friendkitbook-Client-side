@@ -5,12 +5,12 @@ const Navbar = () => {
   return (
     <div className="navbar shadow-lg">
       <div className="navbar-start">
-        <Link className="btn btn-ghost normal-case text-xl">daisyUI</Link>
+        <Link className="btn btn-ghost normal-case text-xl">FriendKitBook</Link>
       </div>
       <div className="navbar-center hidden md:flex lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link> Home</Link>
+            <Link to="/">Home</Link>
           </li>
 
           <li>
@@ -40,20 +40,28 @@ const Navbar = () => {
             <li>
               <Link>Profile</Link>
             </li>
-            <li>
-              <Link>Home</Link>
-            </li>
+            <div className="lg:hidden md:hidden">
+              <li>
+                <Link>Home</Link>
+              </li>
 
-            <li>
-              <Link>Media</Link>
-            </li>
+              <li>
+                <Link>Media</Link>
+              </li>
 
-            <li>
-              <Link>Meassage</Link>
-            </li>
+              <li>
+                <Link>Meassage</Link>
+              </li>
 
+              <li>
+                <Link>About</Link>
+              </li>
+            </div>
             <li>
-              <Link>About</Link>
+              <Link to="/login">Login</Link>
+            </li>
+            <li>
+              <Link to="/signup">Sign Up</Link>
             </li>
           </ul>
         </div>
