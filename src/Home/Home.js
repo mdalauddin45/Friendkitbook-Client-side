@@ -1,5 +1,6 @@
 import React from "react";
 import CreatePost from "../Pages/CreactePost/CreatePost";
+import Allpost from "../Pages/Home/AllMedia/Allpost";
 import LeftSideNav from "../Pages/Shared/LeftSideNav";
 import RightSideNav from "../Pages/Shared/RightSideNav";
 
@@ -12,6 +13,7 @@ const Home = () => {
         </div>
         <div className="lg:w-[60%] w-full">
           <CreatePost />
+          <Allpost />
         </div>
         <div className="hidden  lg:block w-[20%]">
           <RightSideNav />

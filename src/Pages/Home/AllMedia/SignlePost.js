@@ -2,23 +2,23 @@ import React from "react";
 
 const SignlePost = ({ post }) => {
   console.log(post);
-
+  const { authorName, authorImage, date, time } = post;
   return (
-    <div>
+    <div className="py-5">
       <div className="flex flex-col max-w-[820px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
         <div className="flex items-center justify-between p-3">
           <div className="flex items-center space-x-2">
             <img
-              src="https://source.unsplash.com/50x50/?portrait"
+              src={authorImage}
               alt=""
               className="object-cover object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700"
             />
             <div className="-space-y-1">
               <h2 className="text-sm font-semibold leading-none">
-                leroy_jenkins72
+                {authorName}
               </h2>
               <span className="inline-block text-xs leading-none dark:text-gray-400">
-                Somewhere
+                {date} {time}
               </span>
             </div>
           </div>
@@ -34,11 +34,21 @@ const SignlePost = ({ post }) => {
             </svg>
           </button>
         </div>
-        <img
-          src="https://source.unsplash.com/301x301/?random"
-          alt=""
-          className="object-cover object-center w-full h-72 dark:bg-gray-500"
-        />
+        {post?.image && post?.posttext ? (
+          <>
+            <h1>{post?.posttext}</h1>
+            <img
+              src={post?.image}
+              alt=""
+              className="object-cover object-center w-full h-72 dark:bg-gray-500"
+            />
+          </>
+        ) : (
+          <>
+            <h1>{post?.posttext}</h1>
+          </>
+        )}
+
         <div className="p-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">

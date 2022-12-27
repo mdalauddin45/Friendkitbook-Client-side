@@ -12,7 +12,6 @@ const Allpost = () => {
   console.log(posts);
   return (
     <div>
-      <h1>this is allpost</h1>
       {posts.map((post) => (
         <SignlePost post={post} key={post?._id}></SignlePost>
       ))}
