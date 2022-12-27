@@ -1,9 +1,10 @@
 import React from "react";
+import PostWrite from "./Posts/PostWrite";
 
 const Home = () => {
   return (
     <div>
-      <h1>this is home</h1>
+      <PostWrite />
     </div>
   );
 };

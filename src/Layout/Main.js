@@ -9,14 +9,14 @@ const Main = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex justify-between">
-        <div className="hidden md:block lg:block w-[342px]">
+      <div className="flex">
+        <div className="hidden lg:block w-[20%]">
           <LeftSideNav />
         </div>
-        <div>
+        <div className="lg:w-[60%] w-full">
           <Outlet />
         </div>
-        <div className="hidden md:block lg:block w-[342px]">
+        <div className="hidden  lg:block w-[20%]">
           <RightSideNav />
         </div>
       </div>

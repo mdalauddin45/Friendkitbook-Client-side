@@ -1,7 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   return (
@@ -12,10 +10,7 @@ const Navbar = () => {
       <div className="navbar-center hidden md:flex lg:flex">
         <ul className="menu menu-horizontal px-1">
           <li>
-            <Link>
-              {" "}
-              <FontAwesomeIcon icon={faHouse} /> Home
-            </Link>
+            <Link> Home</Link>
           </li>
 
           <li>
