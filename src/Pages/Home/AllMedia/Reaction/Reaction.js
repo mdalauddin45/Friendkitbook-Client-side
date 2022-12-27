@@ -1,5 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
+import { motion } from "framer-motion";
+import LikeIcon from "../../../../assets/React/likeicon.png";
+import Angry from "../../../../assets/React/angry.svg";
+import Laughing from "../../../../assets/React/laughing.svg";
 
+import Like from "../../../../assets//React/like.svg";
+import Sad from "../../../../assets/React/sad.svg";
+import Soaked from "../../../../assets/React/soaked.svg";
+import Love from "../../../../assets/React/love.svg";
+import "./Reaction.css";
 const Reaction = () => {
   const [btnClicked, setBtnClicked] = useState(false);
 
@@ -21,11 +30,11 @@ const Reaction = () => {
   };
   return (
     <motion.div
-      className="parentDiv"
+      className="parentDiv "
       onClick={() => btnClicked === true && setBtnClicked(false)}
     >
       <motion.div
-        className="reactionsHolder"
+        className="reactionsHolder bg-white shadow-lg rounded-lg"
         variants={list}
         animate={btnClicked ? "visible" : "hidden"}
       >
@@ -72,13 +81,27 @@ const Reaction = () => {
           onClick={() => setBtnClicked(false)}
         />
       </motion.div>
-      <motion.button
-        whileHover={{ scale: 1.2 }}
-        className="likeBtn"
-        onClick={() => setBtnClicked(true)}
-      >
-        <motion.img src={LikeIcon} width="15" /> &nbsp; Like
-      </motion.button>
+      <div className="flex absolute">
+        <div>
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            className="flex px-3"
+            onClick={() => setBtnClicked(true)}
+          >
+            <motion.img src={LikeIcon} width="20" />
+            &nbsp;
+          </motion.button>
+        </div>
+        <div>
+          <motion.button
+            whileHover={{ scale: 1.2 }}
+            className="flex"
+            onClick={() => setBtnClicked(true)}
+          >
+            <motion.img src={LikeIcon} width="20" /> &nbsp; Like
+          </motion.button>
+        </div>
+      </div>
     </motion.div>
   );
 };

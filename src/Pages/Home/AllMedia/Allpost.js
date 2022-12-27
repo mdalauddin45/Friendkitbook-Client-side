@@ -9,7 +9,7 @@ const Allpost = () => {
       .then((res) => res.json())
       .then((data) => setPosts(data));
   }, []);
-  console.log(posts);
+  // console.log(posts);
   return (
     <div>
       {posts.map((post) => (

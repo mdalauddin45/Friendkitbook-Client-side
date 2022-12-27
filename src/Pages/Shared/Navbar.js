@@ -6,7 +6,7 @@ import PrimaryButton from "../../components/Button/PrimaryButton";
 import { AuthContext } from "../../contexts/AuthProvider";
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log(user);
+  // console.log(user);
   return (
     <div className="navbar shadow-lg">
       <div className="navbar-start">
