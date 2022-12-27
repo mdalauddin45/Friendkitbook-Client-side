@@ -19,15 +19,3 @@ export const setAuthToken = (user) => {
       localStorage.setItem("friendkitbook-token", data.token);
     });
 };
-
-export const saveBooking = (bookingData) => {
-  // Post method fetch
-  return fetch(`${process.env.REACT_APP_API_URL}/bookings`, {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-      authorization: `Bearer ${localStorage.getItem("nest-token")}`,
-    },
-    body: JSON.stringify(bookingData),
-  });
-};

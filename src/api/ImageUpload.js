@@ -27,3 +27,16 @@ export const addPost = async (postData) => {
   const data = await response.json();
   return data;
 };
+export const addComment = async (commentData) => {
+  const response = await fetch(`http://localhost:5000/comments`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("friendkitbook-token")}`,
+    },
+    body: JSON.stringify(commentData),
+  });
+
+  const data = await response.json();
+  return data;
+};

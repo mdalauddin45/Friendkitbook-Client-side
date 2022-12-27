@@ -1,10 +1,49 @@
-import React from "react";
-import { Link, useLoaderData } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { useEffect } from "react";
+import { toast } from "react-hot-toast";
+import { useLoaderData } from "react-router-dom";
+import { addComment } from "../../../api/ImageUpload";
+import PrimaryButton from "../../../components/Button/PrimaryButton";
+import SmallSpinner from "../../../components/Spinner/SmallSpinner";
+import { AuthContext } from "../../../contexts/AuthProvider";
+import AllComment from "./AllComment";
 
 const Detail = () => {
   const postData = useLoaderData();
-  console.log(postData);
+  const { user } = useContext(AuthContext);
+  const [comments, setComments] = useState([]);
+  const [loading, setLoading] = useState(false);
+  // console.log(postData);
   const { authorName, authorImage, date, time, _id } = postData;
+  useEffect(() => {
+    fetch(`http://localhost:5000/comment/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        // console.log(data);
+        setComments(data);
+      });
+  }, [loading]);
+  // console.log(comments);
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const comment = event.target.comment.value;
+    // console.log(comment);
+    const commentData = {
+      commentText: comment,
+      userImage: user?.photoURL,
+      userName: user?.displayName,
+      _id,
+      time,
+      date,
+    };
+    console.log(commentData);
+    addComment(commentData).then((data) => {
+      console.log(data);
+      toast.success("Comment Successfuly !");
+      event.target.reset();
+      setLoading(true);
+    });
+  };
   return (
     <div>
       <div className="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row md:flex-row">
@@ -34,13 +73,31 @@ const Detail = () => {
           <div className="py-3">
             {postData.posttext && <h1>{postData?.posttext}</h1>}
           </div>
-          <h3 className="text-3xl font-bold">
-            We're not reinventing the wheel
-          </h3>
-          <p className="my-6 dark:text-gray-400">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor
-            aliquam possimus quas, error esse quos.
-          </p>
+          <div className="space-y-3">
+            <p className="text-sm">
+              <span className="text-base font-semibold">leroy_jenkins72</span>
+              Nemo ea quasi debitis impedit!
+            </p>
+
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                required
+                name="comment"
+                placeholder="Add a comment..."
+                className="w-full py-2 px-2 dark:bg-transparent border-none rounded text-sm  text-gray-900"
+              />
+              <PrimaryButton
+                type="submit"
+                classes="w-full mt-2 px-8 py-3 font-semibold rounded-md  "
+              >
+                Post comment
+              </PrimaryButton>
+            </form>
+          </div>
+          {comments.map((comment) => (
+            <AllComment key={comment?._id} comment={comment}></AllComment>
+          ))}
           <button type="button" className="self-start">
             Action
           </button>

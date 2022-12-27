@@ -1,10 +1,37 @@
 import React from "react";
+import { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
+import { addComment } from "../../../api/ImageUpload";
+import PrimaryButton from "../../../components/Button/PrimaryButton";
+import SmallSpinner from "../../../components/Spinner/SmallSpinner";
+import { AuthContext } from "../../../contexts/AuthProvider";
 import Reaction from "./Reaction/Reaction";
+import { format } from "date-fns";
 
 const SignlePost = ({ post }) => {
+  const { loading, user } = useContext(AuthContext);
   // console.log(post);
   const { authorName, authorImage, date, time, _id } = post;
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const comment = event.target.comment.value;
+    // console.log(comment);
+    const commentData = {
+      commentText: comment,
+      userImage: user?.photoURL,
+      userName: user?.displayName,
+      _id,
+      time: format(new Date(), "p"),
+      date: format(new Date(), "PP"),
+    };
+    // console.log(commentData);
+    addComment(commentData).then((data) => {
+      console.log(data);
+      toast.success("Comment Successfuly !");
+      event.target.reset();
+    });
+  };
   return (
     <div className="py-5 mx-3">
       <div className="flex flex-col max-w-[810px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">
@@ -122,11 +149,21 @@ const SignlePost = ({ post }) => {
               Nemo ea quasi debitis impedit!
             </p>
 
-            <input
-              type="text"
-              placeholder="Add a comment..."
-              className="w-full py-0.5 dark:bg-transparent border-none rounded text-sm pl-0 dark:text-gray-100"
-            />
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                required
+                name="comment"
+                placeholder="Add a comment..."
+                className="w-full py-2 px-2 dark:bg-transparent border-none rounded text-sm  text-gray-900"
+              />
+              <PrimaryButton
+                type="submit"
+                classes="w-full mt-2 px-8 py-3 font-semibold rounded-md  "
+              >
+                {loading ? <SmallSpinner /> : "Post comment"}
+              </PrimaryButton>
+            </form>
           </div>
         </div>
       </div>
