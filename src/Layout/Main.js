@@ -9,7 +9,7 @@ const Main = () => {
   return (
     <div>
       <Navbar />
-      <div className="flex">
+      <div className="flex py-5">
         <div className="hidden lg:block w-[20%]">
           <LeftSideNav />
         </div>
