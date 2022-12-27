@@ -6,7 +6,7 @@ import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 import { addPost, imageUpload } from "../../../api/ImageUpload";
 import { toast } from "react-hot-toast";
 import { Navigate } from "react-router-dom";
-
+import { format } from "date-fns";
 const PostWrite = () => {
   const { user } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
@@ -15,12 +15,14 @@ const PostWrite = () => {
     event.preventDefault();
     const posttext = event.target.posttext.value;
     const name = user?.displayName;
-    const date = new Date().toDateString();
-    const time = new Date().toLocaleTimeString();
+    const date = format(new Date(), "PP");
+    const time = format(new Date(), "p");
+    console.log(date, time);
     // Image Upload
     const image = event.target.image.files[0];
-    console.log(posttext, name, date, time);
+    // console.log(posttext, name, date, time);
     setLoading(true);
+    console.log(image);
     imageUpload(image)
       .then((res) => {
         const postData = {
@@ -28,15 +30,16 @@ const PostWrite = () => {
           name,
           date,
           time,
-          image: res.data.display_url,
+          image: res?.data?.display_url,
           email: user?.email,
         };
-        // console.log(categoriData);
+        console.log(postData);
         addPost(postData).then((data) => {
-          // console.log(data);
+          console.log(data);
           setLoading(false);
           toast.success("post Successfuly !");
-          Navigate("/");
+          event.target.reset();
+          Navigate("/media");
         });
       })
       .catch((err) => {
@@ -62,6 +65,7 @@ const PostWrite = () => {
             </div>
             <div>
               <textarea
+                required
                 name="posttext"
                 className="textarea w-96"
                 placeholder="Write something about you..."
