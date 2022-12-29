@@ -19,3 +19,20 @@ export const setAuthToken = (user) => {
       localStorage.setItem("friendkitbook-token", data.token);
     });
 };
+
+// export const likePost = (id, userId) =>
+//   API.put(`posts/${id}/like`, { userId: userId });
+
+// export const likePost = async (id, userName) => {
+//   const response = await fetch(`http://localhost:5000/like/${id}`, {
+//     method: "PUT",
+//     headers: {
+//       "content-type": "application/json",
+//       authorization: `Bearer ${localStorage.getItem("friendkitbook-token")}`,
+//     },
+//     body: JSON.stringify(id, userName),
+//   });
+
+//   const data = await response.json();
+//   return data;
+// };

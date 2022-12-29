@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { addComment } from "../../../api/ImageUpload";
+import { addComment, likePost } from "../../../api/ImageUpload";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 import { AuthContext } from "../../../contexts/AuthProvider";
-import Reaction from "./Reaction/Reaction";
 import { format } from "date-fns";
 import { useEffect } from "react";
-import { comment } from "postcss";
+import Heart from "../../../assets/Post/like.png";
+import NotLike from "../../../assets/Post/notlike.png";
 
 const SignlePost = ({ post }) => {
-  const { loading, user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(false);
   const [resendComment, setResendComment] = useState([]);
+  const [liked, setLiked] = useState(false);
+  const [likes, setLikes] = useState(0);
+  const [likelength, setLikeLength] = useState(0);
+
   // console.log(post);
   const { authorName, authorImage, date, time, _id } = post;
   const handleSubmit = (event) => {
@@ -42,9 +47,29 @@ const SignlePost = ({ post }) => {
         setResendComment(data);
       });
   }, []);
-  console.log();
   const rescentComment = { ...resendComment?.slice(0) };
-  console.log(rescentComment[0]?.comment?.commentText);
+
+  const handleLike = () => {
+    // console.log(post._id);
+    const likeData = {
+      _id,
+    };
+    likePost(likeData);
+
+    setLiked((prev) => !prev);
+    liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1);
+  };
+  console.log(liked);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/likes/${_id}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLikeLength(data.length);
+      });
+  }, [loading]);
+  console.log(likes);
+  console.log(likelength);
 
   return (
     <div className="py-5 mx-3">
@@ -98,25 +123,42 @@ const SignlePost = ({ post }) => {
         )}
 
         <div className="">
-          <div className="flex border justify-evenly">
-            <Reaction />
-            <Link>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth="1.5"
-                stroke="currentColor"
-                className="w-6 h-6"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 12.76c0 1.6 1.123 2.994 2.707 3.227 1.068.157 2.148.279 3.238.364.466.037.893.281 1.153.671L12 21l2.652-3.978c.26-.39.687-.634 1.153-.67 1.09-.086 2.17-.208 3.238-.365 1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
-                />
-              </svg>
-            </Link>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-3">
+              <img
+                src={liked ? Heart : NotLike}
+                alt=""
+                style={{ cursor: "pointer" }}
+                onClick={handleLike}
+              />
 
+              <button
+                type="button"
+                title="Add a comment"
+                className="flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-5 h-5 fill-current"
+                >
+                  <path d="M496,496H480a273.39,273.39,0,0,1-179.025-66.782l-16.827-14.584C274.814,415.542,265.376,416,256,416c-63.527,0-123.385-20.431-168.548-57.529C41.375,320.623,16,270.025,16,216S41.375,111.377,87.452,73.529C132.615,36.431,192.473,16,256,16S379.385,36.431,424.548,73.529C470.625,111.377,496,161.975,496,216a171.161,171.161,0,0,1-21.077,82.151,201.505,201.505,0,0,1-47.065,57.537,285.22,285.22,0,0,0,63.455,97L496,457.373ZM294.456,381.222l27.477,23.814a241.379,241.379,0,0,0,135,57.86,317.5,317.5,0,0,1-62.617-105.583v0l-4.395-12.463,9.209-7.068C440.963,305.678,464,262.429,464,216c0-92.636-93.309-168-208-168S48,123.364,48,216s93.309,168,208,168a259.114,259.114,0,0,0,31.4-1.913Z"></path>
+                </svg>
+              </button>
+              <button
+                type="button"
+                title="Share post"
+                className="flex items-center justify-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-5 h-5 fill-current"
+                >
+                  <path d="M474.444,19.857a20.336,20.336,0,0,0-21.592-2.781L33.737,213.8v38.066l176.037,70.414L322.69,496h38.074l120.3-455.4A20.342,20.342,0,0,0,474.444,19.857ZM337.257,459.693,240.2,310.37,389.553,146.788l-23.631-21.576L215.4,290.069,70.257,232.012,443.7,56.72Z"></path>
+                </svg>
+              </button>
+            </div>
             <button
               type="button"
               title="Bookmark post"
@@ -153,7 +195,7 @@ const SignlePost = ({ post }) => {
               <span className="text-sm">
                 Liked by
                 <span className="font-semibold">Mamba UI</span>and
-                <span className="font-semibold">86 others</span>
+                <span className="font-semibold"> {likelength} others</span>
               </span>
             </div>
           </div>
