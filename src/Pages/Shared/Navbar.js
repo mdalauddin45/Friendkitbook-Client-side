@@ -53,11 +53,11 @@ const Navbar = () => {
             </li>
             <div className="lg:hidden md:hidden">
               <li>
-                <Link>Home</Link>
+                <Link to="/">Home</Link>
               </li>
 
               <li>
-                <Link>Media</Link>
+                <Link to="/media">Media</Link>
               </li>
 
               <li>
