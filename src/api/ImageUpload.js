@@ -54,3 +54,16 @@ export const likePost = async (id) => {
   const data = await response.json();
   return data;
 };
+export const addAbout = async (aboutData) => {
+  const response = await fetch(`http://localhost:5000/about`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${localStorage.getItem("friendkitbook-token")}`,
+    },
+    body: JSON.stringify(aboutData),
+  });
+
+  const data = await response.json();
+  return data;
+};

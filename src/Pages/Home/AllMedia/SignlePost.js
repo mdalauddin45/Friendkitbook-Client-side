@@ -163,6 +163,16 @@ const SignlePost = ({ post }) => {
               </svg>
             </button>
           </div>
+          <div className="flex flex-wrap items-center pt-3 pb-1">
+            <div className="flex items-center space-x-2">
+              {totallike > 0 && (
+                <h1 className="text-sm">
+                  Liked by
+                  <span className="font-semibold"> {totallike} others</span>
+                </h1>
+              )}
+            </div>
+          </div>
           <div className="space-y-3">
             <p className="text-sm ">
               {resendComment?.slice(0, 2).map((comment) => (

@@ -7,6 +7,7 @@ import SmallSpinner from "../../components/Spinner/SmallSpinner";
 import { AuthContext } from "../../contexts/AuthProvider";
 import signupImg1 from "../../assets/Account//type-2-bg-dark.svg";
 import signupImg2 from "../../assets/Account//type-2.svg";
+import { addAbout } from "../../api/ImageUpload";
 
 const SignUp = () => {
   const {
@@ -44,19 +45,21 @@ const SignUp = () => {
           name,
           email,
           image: imageData.data.display_url,
+          university: "xyz",
+          address: "xyz",
         };
         console.log(userData);
-
+        addAbout(userData).then((data) => {
+          console.log(data);
+        });
         // Create User
         createUser(email, password)
           .then((result) => {
             setAuthToken(result.user);
+
             // console.log(result.user);
             updateUserProfile(name, imageData.data.display_url)
               .then(() => {
-                // if (userData.role === "host") {
-                //   makeHost(userData);
-                // }
                 toast.success("Sign up Succesfuly");
                 setLoading(false);
                 navigate(from, { replace: true });

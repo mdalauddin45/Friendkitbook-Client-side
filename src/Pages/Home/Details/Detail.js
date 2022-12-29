@@ -140,10 +140,10 @@ const Detail = () => {
             <div className="flex flex-wrap items-center pt-3 pb-1">
               <div className="flex items-center space-x-2">
                 {totallike > 0 && (
-                  <span className="text-sm">
+                  <h1 className="text-sm">
                     Liked by
                     <span className="font-semibold"> {totallike} others</span>
-                  </span>
+                  </h1>
                 )}
               </div>
             </div>

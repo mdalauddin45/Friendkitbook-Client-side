@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function AllComment({ comment }) {
   console.log(comment.comment);
@@ -14,13 +15,13 @@ function AllComment({ comment }) {
           className="object-cover w-12 h-12 rounded-full shadow dark:bg-gray-500"
         />
         <div className="flex flex-col space-y-1">
-          <a
+          <Link
             rel="noopener noreferrer"
-            href="#"
+            to="/"
             className="text-sm font-semibold"
           >
             {userName}
-          </a>
+          </Link>
           <span className="text-xs dark:text-gray-400">{commentText}</span>
           <span className="text-xs dark:text-gray-400">
             {date} {time}

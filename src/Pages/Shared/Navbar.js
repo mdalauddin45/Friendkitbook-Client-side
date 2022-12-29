@@ -29,11 +29,11 @@ const Navbar = () => {
           </li>
 
           <li>
-            <Link>Meassage</Link>
+            <Link to="/meassage">Meassage</Link>
           </li>
 
           <li>
-            <Link>About</Link>
+            <Link to="/about">About</Link>
           </li>
         </ul>
       </div>
@@ -49,7 +49,7 @@ const Navbar = () => {
             className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <Link>Profile</Link>
+              <Link to="/about">Profile</Link>
             </li>
             <div className="lg:hidden md:hidden">
               <li>
@@ -61,11 +61,11 @@ const Navbar = () => {
               </li>
 
               <li>
-                <Link>Meassage</Link>
+                <Link to="/meassage">Meassage</Link>
               </li>
 
               <li>
-                <Link>About</Link>
+                <Link to="/about">About</Link>
               </li>
             </div>
             {user?.email ? (
