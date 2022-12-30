@@ -65,7 +65,6 @@ const AboutModal = ({ loading, user, handleModalSubmit, userMatch }) => {
             </div>
             <div>
               <input
-                required
                 type="file"
                 id="image"
                 name="image"

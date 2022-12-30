@@ -22,7 +22,6 @@ const SignlePost = ({ post }) => {
 
   // console.log(post);
   const { authorName, authorImage, date, time, _id, likes } = post;
-  console.log(post);
   const handleSubmit = (event) => {
     event.preventDefault();
     const comment = event.target.comment.value;
@@ -87,7 +86,6 @@ const SignlePost = ({ post }) => {
   };
   const totallike = likes + likeCount;
 
-  console.log(totallike);
   return (
     <div className="py-5 mx-3">
       <div className="flex flex-col max-w-[810px] mx-auto p-6 space-y-6 overflow-hidden rounded-lg shadow-md ">

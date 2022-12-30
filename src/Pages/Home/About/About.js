@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-import PrimaryButton from "../../../components/Button/PrimaryButton";
 import { AuthContext } from "../../../contexts/AuthProvider";
 import AboutModal from "./AboutModal";
 
@@ -64,12 +63,16 @@ const About = () => {
           });
       });
   };
+  console.log(user);
   return (
     <div>
       <div className="flex justify-end">
-        <PrimaryButton classes="px-2 py-2 font-bold ">
-          <label htmlFor="booking-modal">Update </label>
-        </PrimaryButton>
+        <label
+          htmlFor="booking-modal"
+          className="px-5 py-3 text-white bg-[#5596e6] text-xl  text-gary-300"
+        >
+          Update
+        </label>
       </div>
 
       <div className="flex flex-col justify-center  p-6 shadow-md rounded-xl sm:px-12 ">
@@ -82,12 +85,12 @@ const About = () => {
         <div className="space-y-4 text-center divide-y ">
           <div className="my-2 space-y-1">
             <h2 className="text-2xl font-semibold sm:text-2xl">
-              {userMatch?.name}
+              {userMatch?.name ? userMatch?.name : user?.displayName}
             </h2>
             <h1 className="px-5 ">
               Email :
               <span className="pl-1">
-                {userMatch?.email ? userMatch?.email : "N/A"}
+                {userMatch?.email ? userMatch?.email : user?.email}
               </span>
             </h1>
             <h1 className="px-5 ">
