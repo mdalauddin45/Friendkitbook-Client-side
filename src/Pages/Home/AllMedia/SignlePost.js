@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
-import { addComment, likePost } from "../../../api/ImageUpload";
+import { addComment } from "../../../api/ImageUpload";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
 import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 import { AuthContext } from "../../../contexts/AuthProvider";
@@ -22,6 +22,7 @@ const SignlePost = ({ post }) => {
 
   // console.log(post);
   const { authorName, authorImage, date, time, _id, likes } = post;
+  console.log(post);
   const handleSubmit = (event) => {
     event.preventDefault();
     const comment = event.target.comment.value;
@@ -54,9 +55,7 @@ const SignlePost = ({ post }) => {
   const handleLike = (id) => {
     // console.log(id);
     const likeData = {
-      _id: id,
-      userName: user?.displayName,
-      userImage: user?.photoURL,
+      likes: likeCount + likes,
     };
     if (like) {
       setLike(false);
@@ -67,9 +66,24 @@ const SignlePost = ({ post }) => {
       setLikeImage(Heart);
       setLikeCount(likeCount + 1);
     }
-    likePost(likeData).then((data) => {
-      console.log(data);
-    });
+
+    fetch(`http://localhost:5000/post/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(likeData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("like Successfully");
+
+        setLoading(true);
+        setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+      });
   };
   const totallike = likes + likeCount;
 
@@ -130,7 +144,7 @@ const SignlePost = ({ post }) => {
           <div className="flex items-center justify-between border-y px-10 py-3 mb-2">
             <button
               onClick={() => {
-                handleLike(post);
+                handleLike(_id);
               }}
               type="button"
             >

@@ -2,10 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function AllComment({ comment }) {
-  console.log(comment.comment);
   const { userName, userImage, commentText, date, time } = comment.comment;
-  const dateTime = date + " " + time;
-  console.log(dateTime);
   return (
     <div>
       <div className="flex space-x-4 py-3">
