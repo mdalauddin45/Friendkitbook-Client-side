@@ -37,9 +37,9 @@ const CreatePost = () => {
           authorName: user?.displayName,
           likes: 0,
         };
-        console.log(postData);
+        // console.log(postData);
         addPost(postData).then((data) => {
-          console.log(data);
+          // console.log(data);
           setLoading(false);
           toast.success("post Successfuly !");
           event.target.reset();

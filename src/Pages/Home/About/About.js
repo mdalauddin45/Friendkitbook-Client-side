@@ -19,7 +19,7 @@ const About = () => {
   }, [loading]);
   // console.log(...dbUser);
   const userMatch = [...dbUser]?.find((x) => x.email === user?.email);
-  console.log(userMatch);
+  // console.log(userMatch);
 
   const handleModalSubmit = (event) => {
     event.preventDefault();
@@ -40,7 +40,7 @@ const About = () => {
     })
       .then((res) => res.json())
       .then((imageData) => {
-        console.log(imageData);
+        // console.log(imageData);
         const Update = {
           name,
           email,
@@ -48,7 +48,7 @@ const About = () => {
           address,
           image: imageData?.data?.display_url,
         };
-        console.log(Update);
+        // console.log(Update);
         fetch(`http://localhost:5000/user/${userMatch._id}`, {
           method: "PATCH",
           headers: {
@@ -64,7 +64,7 @@ const About = () => {
           });
       });
   };
-  console.log(user);
+  // console.log(user);
   return (
     <div>
       <div className="flex justify-end">
