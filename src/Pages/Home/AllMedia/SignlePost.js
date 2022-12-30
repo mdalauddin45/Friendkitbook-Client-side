@@ -36,8 +36,6 @@ const SignlePost = ({ post }) => {
     };
     // console.log(commentData);
     addComment(commentData).then((data) => {
-      console.log(data);
-
       toast.success("Comment Successfuly !");
       event.target.reset();
     });
@@ -75,9 +73,6 @@ const SignlePost = ({ post }) => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-        toast.success("like Successfully");
-
         setLoading(true);
         setTimeout(() => {
           setLoading(false);

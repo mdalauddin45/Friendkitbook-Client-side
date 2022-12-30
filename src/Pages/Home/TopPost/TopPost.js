@@ -13,7 +13,7 @@ const TopPost = () => {
       });
   }, [loading]);
   const topPost = posts?.sort((a, b) => b.likes - a.likes);
-  console.log(topPost.slice(0, 3));
+  //   console.log(topPost.slice(0, 3));
   return (
     <div>
       {topPost.slice(0, 3).map((post) => (

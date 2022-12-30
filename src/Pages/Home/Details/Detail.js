@@ -42,9 +42,7 @@ const Detail = () => {
       time: format(new Date(), "p"),
       date: format(new Date(), "PP"),
     };
-    console.log(commentData);
     addComment(commentData).then((data) => {
-      console.log(data);
       toast.success("Comment Successfuly !");
       event.target.reset();
       setLoading(!loading);
