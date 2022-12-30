@@ -35,7 +35,7 @@ const CreatePost = () => {
           email: user?.email,
           authorImage: user?.photoURL,
           authorName: user?.displayName,
-          likes: 10,
+          likes: 0,
         };
         console.log(postData);
         addPost(postData).then((data) => {

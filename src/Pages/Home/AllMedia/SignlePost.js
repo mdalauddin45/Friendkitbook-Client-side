@@ -53,9 +53,7 @@ const SignlePost = ({ post }) => {
   // console.log(likes + 1);
   const handleLike = (id) => {
     // console.log(id);
-    const likeData = {
-      likes: likeCount + likes,
-    };
+
     if (like) {
       setLike(false);
       setLikeImage(NotLike);
@@ -65,7 +63,9 @@ const SignlePost = ({ post }) => {
       setLikeImage(Heart);
       setLikeCount(likeCount + 1);
     }
-
+    const likeData = {
+      likes: likes + likeCount,
+    };
     fetch(`http://localhost:5000/post/${id}`, {
       method: "PATCH",
       headers: {
@@ -121,7 +121,7 @@ const SignlePost = ({ post }) => {
           {post?.image && post?.posttext ? (
             <>
               <h1>
-                {post?.posttext?.slice(0, 300) + "..."}
+                {post?.posttext?.slice(0, 500) + "..."}
                 <Link to={`/media/${_id}`}>see more</Link>
               </h1>
               <Link to={`/media/${_id}`}>
@@ -134,7 +134,11 @@ const SignlePost = ({ post }) => {
             </>
           ) : (
             <>
-              <h1>{post?.posttext}</h1>
+              <h1>
+                {" "}
+                {post?.posttext?.slice(0, 500) + "..."}
+                <Link to={`/media/${_id}`}>see more</Link>
+              </h1>
             </>
           )}
         </div>
@@ -148,19 +152,22 @@ const SignlePost = ({ post }) => {
             >
               <img src={likeImage} className="w-7 h-6 fill-current" alt="" />
             </button>
-            <button
-              type="button"
-              title="Add a comment"
-              className="flex items-center justify-center "
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 512 512"
-                className="w-7 h-6 fill-current"
+            <Link to={`/media/${_id}`}>
+              <button
+                type="button"
+                title="Add a comment"
+                className="flex items-center justify-center "
               >
-                <path d="M496,496H480a273.39,273.39,0,0,1-179.025-66.782l-16.827-14.584C274.814,415.542,265.376,416,256,416c-63.527,0-123.385-20.431-168.548-57.529C41.375,320.623,16,270.025,16,216S41.375,111.377,87.452,73.529C132.615,36.431,192.473,16,256,16S379.385,36.431,424.548,73.529C470.625,111.377,496,161.975,496,216a171.161,171.161,0,0,1-21.077,82.151,201.505,201.505,0,0,1-47.065,57.537,285.22,285.22,0,0,0,63.455,97L496,457.373ZM294.456,381.222l27.477,23.814a241.379,241.379,0,0,0,135,57.86,317.5,317.5,0,0,1-62.617-105.583v0l-4.395-12.463,9.209-7.068C440.963,305.678,464,262.429,464,216c0-92.636-93.309-168-208-168S48,123.364,48,216s93.309,168,208,168a259.114,259.114,0,0,0,31.4-1.913Z"></path>
-              </svg>
-            </button>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 512 512"
+                  className="w-7 h-6 fill-current"
+                >
+                  <path d="M496,496H480a273.39,273.39,0,0,1-179.025-66.782l-16.827-14.584C274.814,415.542,265.376,416,256,416c-63.527,0-123.385-20.431-168.548-57.529C41.375,320.623,16,270.025,16,216S41.375,111.377,87.452,73.529C132.615,36.431,192.473,16,256,16S379.385,36.431,424.548,73.529C470.625,111.377,496,161.975,496,216a171.161,171.161,0,0,1-21.077,82.151,201.505,201.505,0,0,1-47.065,57.537,285.22,285.22,0,0,0,63.455,97L496,457.373ZM294.456,381.222l27.477,23.814a241.379,241.379,0,0,0,135,57.86,317.5,317.5,0,0,1-62.617-105.583v0l-4.395-12.463,9.209-7.068C440.963,305.678,464,262.429,464,216c0-92.636-93.309-168-208-168S48,123.364,48,216s93.309,168,208,168a259.114,259.114,0,0,0,31.4-1.913Z"></path>
+                </svg>
+              </button>
+            </Link>
+
             <button
               type="button"
               title="Share post"

@@ -139,12 +139,22 @@ const Detail = () => {
             </div>
             <div className="flex flex-wrap items-center pt-3 pb-1">
               <div className="flex items-center space-x-2">
-                {totallike > 0 && (
-                  <h1 className="text-sm">
-                    Liked by
-                    <span className="font-semibold"> {totallike} others</span>
-                  </h1>
-                )}
+                <div>
+                  {totallike > 0 && (
+                    <h1 className="text-sm">
+                      Liked by
+                      <span className="font-semibold"> {totallike} others</span>
+                    </h1>
+                  )}
+                </div>
+                <div className="flex justify-end md:px-2 px-10">
+                  {comments && comments.length > 0 && (
+                    <h1 className="text-sm">
+                      <span className="font-semibold"> {comments.length} </span>
+                      comments
+                    </h1>
+                  )}
+                </div>
               </div>
             </div>
 

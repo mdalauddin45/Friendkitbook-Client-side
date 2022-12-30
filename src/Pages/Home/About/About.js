@@ -28,6 +28,7 @@ const About = () => {
     const university = event.target.university.value;
     const address = event.target.address.value;
     const image = event.target.image.files[0];
+
     // console.log(name, email, password, image);
     const formData = new FormData();
     formData.append("image", image);
