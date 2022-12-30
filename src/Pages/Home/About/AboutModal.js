@@ -1,7 +1,8 @@
 import React from "react";
 import PrimaryButton from "../../../components/Button/PrimaryButton";
+import SmallSpinner from "../../../components/Spinner/SmallSpinner";
 
-const AboutModal = ({ user, handleModalSubmit }) => {
+const AboutModal = ({ loading, user, handleModalSubmit, userMatch }) => {
   return (
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -32,6 +33,7 @@ const AboutModal = ({ user, handleModalSubmit }) => {
             <div className="space-y-3 text-sm">
               <label className="block text-sm">Email</label>
               <input
+                disabled
                 defaultValue={user?.email}
                 type="email"
                 name="email"
@@ -47,6 +49,7 @@ const AboutModal = ({ user, handleModalSubmit }) => {
                 name="university"
                 placeholder="University Name"
                 className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-900 focus:dark:border-green-400"
+                defaultValue={userMatch?.university}
               />
             </div>
 
@@ -57,14 +60,27 @@ const AboutModal = ({ user, handleModalSubmit }) => {
                 name="address"
                 placeholder="Enter Your Addres Address"
                 className="w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-100 dark:text-gray-900 focus:dark:border-green-400"
+                defaultValue={userMatch?.address}
               />
             </div>
-            <PrimaryButton
-              type="submit"
-              classes="block w-full p-3 text-center rounded-sm text-white"
-            >
-              Submit
-            </PrimaryButton>
+            <div>
+              <input
+                required
+                type="file"
+                id="image"
+                name="image"
+                accept="image/*"
+                className="file-input  file-input-success w-full max-w-xs"
+              />
+            </div>
+            <div>
+              <PrimaryButton
+                type="submit"
+                classes="w-full px-8 py-5 font-semibold rounded-lg "
+              >
+                {loading ? <SmallSpinner /> : "Submit & Update"}
+              </PrimaryButton>
+            </div>
           </form>
         </div>
       </div>

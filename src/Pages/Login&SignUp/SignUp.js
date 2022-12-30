@@ -41,17 +41,6 @@ const SignUp = () => {
     })
       .then((res) => res.json())
       .then((imageData) => {
-        const userData = {
-          name,
-          email,
-          image: imageData.data.display_url,
-          university: "xyz",
-          address: "xyz",
-        };
-        console.log(userData);
-        addAbout(userData).then((data) => {
-          console.log(data);
-        });
         // Create User
         createUser(email, password)
           .then((result) => {
