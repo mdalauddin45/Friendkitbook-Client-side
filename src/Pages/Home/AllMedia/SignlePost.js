@@ -174,16 +174,16 @@ const SignlePost = ({ post }) => {
             </div>
           </div>
           <div className="space-y-3">
-            <p className="text-sm ">
+            <h1 className="text-sm ">
               {resendComment?.slice(0, 2).map((comment) => (
                 <AllComment comment={comment} key={comment._id} />
               ))}
-            </p>
+            </h1>
             {resendComment?.length > 2 && (
               <Link to={`/media/${_id}`}>
-                <p className="text-sm text-gray-500">
+                <h1 className="text-sm text-gray-500">
                   View all {resendComment?.length} comments
-                </p>
+                </h1>
               </Link>
             )}
             <form onSubmit={handleSubmit}>

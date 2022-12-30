@@ -6,6 +6,7 @@ import AboutModal from "./AboutModal";
 
 const About = () => {
   const { user } = useContext(AuthContext);
+  const [dbUser, setDbUser] = useState(null);
   const [abouts, setAbouts] = useState([]);
   useEffect(() => {
     fetch(`http://localhost:5000/about/${user?.email}`)
@@ -15,6 +16,14 @@ const About = () => {
       });
   }, []);
   console.log(abouts);
+  useEffect(() => {
+    fetch(`http://localhost:5000/user/${user?.email}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setDbUser(data);
+      });
+  }, []);
+  console.log(dbUser);
 
   const handleModalSubmit = (event) => {
     event.preventDefault();
@@ -29,7 +38,7 @@ const About = () => {
       address,
     };
     console.log(Update);
-    // fetch(` https://assignment-11-server-kappa.vercel.app/review/${id}`, {
+    // fetch(` https:///${id}`, {
     //   method: "PATCH",
     //   headers: {
     //     "content-type": "application/json",
