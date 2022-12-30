@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <div className="flex py-5">
-        <div className="hidden lg:block w-[20%]">
+        <div className="hidden lg:block w-[20%] ">
           <LeftSideNav />
         </div>
         <div className="lg:w-[60%] w-full">

@@ -16,8 +16,8 @@ const LeftSideNav = () => {
   // console.log(...dbUser);
   const userMatch = [...dbUser]?.find((x) => x.email === user?.email);
   return (
-    <div>
-      <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12">
+    <div className="sticky  top-2">
+      <div className="flex flex-col justify-center max-w-xs p-6 shadow-md rounded-xl sm:px-12 ">
         <img
           src={userMatch?.image ? userMatch?.image : user?.photoURL}
           alt=""

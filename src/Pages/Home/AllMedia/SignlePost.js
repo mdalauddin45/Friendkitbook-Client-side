@@ -182,14 +182,25 @@ const SignlePost = ({ post }) => {
               </svg>
             </button>
           </div>
-          <div className="flex flex-wrap items-center pt-3 pb-1">
+          <div className="flex justify-between pt-3 pb-1">
             <div className="flex items-center space-x-2">
               {totallike > 0 && (
-                <h1 className="text-sm">
+                <div className="text-sm">
                   Liked by
-                  <span className="font-semibold"> {totallike} others</span>
-                </h1>
+                  <span className="font-semibold pl-1">
+                    {totallike < 1000 ? totallike : totallike / 1000 + "k"}
+                    <span className="pl-1"> others</span>
+                  </span>
+                </div>
               )}
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="text-sm">
+                <span className="font-semibold pl-1">
+                  {resendComment.length ? resendComment.length : ""}
+                  {resendComment?.length == 0 ? " " : " comments"}
+                </span>
+              </div>
             </div>
           </div>
           <div className="space-y-3">

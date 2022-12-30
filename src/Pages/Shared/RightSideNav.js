@@ -12,12 +12,9 @@ const RightSideNav = () => {
         setDbUser(data);
       });
   }, []);
-  // console.log(dbUser);
-  const userMatch = [...dbUser]?.find((x) => x.email === user?.email);
-  // console.log(userMatch);
 
   return (
-    <div>
+    <div className="sticky  top-2">
       <h1 className="text-xl font-bold pb-2">People You may know</h1>
       <div className="block ">
         {dbUser?.map((user) => (
