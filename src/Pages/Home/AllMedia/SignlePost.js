@@ -41,7 +41,7 @@ const SignlePost = ({ post }) => {
     });
   };
   useEffect(() => {
-    fetch(`http://localhost:5000/comment/${_id}`)
+    fetch(`https://server-side-ten.vercel.app/comment/${_id}`)
       .then((res) => res.json())
       .then((data) => {
         setResendComment(data);
@@ -64,7 +64,7 @@ const SignlePost = ({ post }) => {
     const likeData = {
       likes: likes + likeCount,
     };
-    fetch(`http://localhost:5000/post/${id}`, {
+    fetch(`https://server-side-ten.vercel.app/post/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",

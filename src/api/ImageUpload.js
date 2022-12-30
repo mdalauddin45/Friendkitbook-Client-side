@@ -15,7 +15,7 @@ export const imageUpload = async (image) => {
 };
 
 export const addPost = async (postData) => {
-  const response = await fetch(`http://localhost:5000/posts`, {
+  const response = await fetch(`https://server-side-ten.vercel.app/posts`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -28,7 +28,7 @@ export const addPost = async (postData) => {
   return data;
 };
 export const addComment = async (commentData) => {
-  const response = await fetch(`http://localhost:5000/comments`, {
+  const response = await fetch(`https://server-side-ten.vercel.app/comments`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -42,7 +42,7 @@ export const addComment = async (commentData) => {
 };
 
 export const likePost = async (id) => {
-  const response = await fetch(`http://localhost:5000/likes`, {
+  const response = await fetch(`https://server-side-ten.vercel.app/likes`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -55,7 +55,7 @@ export const likePost = async (id) => {
   return data;
 };
 export const addAbout = async (aboutData) => {
-  const response = await fetch(`http://localhost:5000/about`, {
+  const response = await fetch(`https://server-side-ten.vercel.app/about`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

@@ -5,7 +5,7 @@ const TopPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch("http://localhost:5000/posts")
+    fetch("https://server-side-ten.vercel.app/posts")
       .then((res) => res.json())
       .then((data) => {
         setPosts(data);

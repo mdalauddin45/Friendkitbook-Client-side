@@ -22,7 +22,7 @@ const Detail = () => {
   // console.log(postData);
   const { authorName, authorImage, date, time, _id, likes } = postData;
   useEffect(() => {
-    fetch(`http://localhost:5000/comment/${_id}`)
+    fetch(`https://server-side-ten.vercel.app/comment/${_id}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);

@@ -10,7 +10,7 @@ const About = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/users`)
+    fetch(`https://server-side-ten.vercel.app/users`)
       .then((res) => res.json())
       .then((data) => {
         setDbUser(data);
@@ -49,7 +49,7 @@ const About = () => {
           image: imageData?.data?.display_url,
         };
         // console.log(Update);
-        fetch(`http://localhost:5000/user/${userMatch._id}`, {
+        fetch(`https://server-side-ten.vercel.app/user/${userMatch._id}`, {
           method: "PATCH",
           headers: {
             "Content-Type": "application/json",

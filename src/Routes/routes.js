@@ -29,7 +29,7 @@ export const router = createBrowserRouter([
         path: "/media/:id",
         element: <Detail />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/post/${params.id}`),
+          fetch(`https://server-side-ten.vercel.app/post/${params.id}`),
       },
     ],
   },
