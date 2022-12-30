@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SignlePost from "./SignlePost";
+import SignlePost from "../AllMedia/SignlePost";
 
-const Allpost = () => {
+const TopPost = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -12,14 +12,15 @@ const Allpost = () => {
         setLoading(true);
       });
   }, [loading]);
-  // console.log(posts);
+  const topPost = posts?.sort((a, b) => b.likes - a.likes);
+  console.log(topPost.slice(0, 3));
   return (
     <div>
-      {posts.map((post) => (
+      {topPost.slice(0, 3).map((post) => (
         <SignlePost post={post} key={post?._id}></SignlePost>
       ))}
     </div>
   );
 };
 
-export default Allpost;
+export default TopPost;
